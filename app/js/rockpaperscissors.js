@@ -1,74 +1,99 @@
 ////////////////////////////////////////////////
 /*   Provided Code - Please Don't Edit   */
 ////////////////////////////////////////////////
+var getInput = function() {
+  console.log("Please choose either 'rock', 'paper', or 'scissors'.");
+  var answer = prompt();
+  return answer;
+};
 
-
-function getInput() {
-    console.log("Please choose either 'rock', 'paper', or 'scissors'.");
-    return prompt();
-}
-
-function randomPlay() {
-    var randomNumber = Math.random();
-    if (randomNumber < 0.33) {
-        return "rock";
-    } else if (randomNumber < 0.66) {
-        return "paper";
-    } else {
-        return "scissors";
-    }
-}
+var randomPlay = function() {
+   var randomNumber = Math.random();
+   if (randomNumber < 0.33) {
+       return 'rock';
+   } else if (randomNumber < 0.66) {
+       return 'paper';
+   } else {
+       return 'scissors';
+   }
+};
 ////////////////////////////////////////////////
 /*           Write Your Code Below            */
 ////////////////////////////////////////////////
-function getPlayerMove(move) {
-    // Write an expression that operates on a variable called `move`
-    // If a `move` has a value, your expression should evaluate to that value.
-    // However, if `move` is not specified / is null, your expression should equal `getInput()`.
+var getPlayerMove = function(move){
+   // Write an expression that operates on a variable called `move`
+   // If a `move` has a value, your expression should evaluate to that value.
+   // However, if `move` is not specified / is null, your expression should equal `getInput()`.
 
-    return move || getInput();
-}
-getPlayerMove();
+   return move || getInput();
+  
+};
 
-function getComputerMove(move) {
-    // Write an expression that operates on a variable called `move`
-    // If a `move` has a value, your expression should evaluate to that value.
-    // However, if `move` is not specified / is null, your expression should equal `randomPlay()`.
+var getComputerMove = function(move) {
+   // Write an expression that operates on a variable called `move`
+   // If a `move` has a value, your expression should evaluate to that value.
+   // However, if `move` is not specified / is null, your expression should equal `randomPlay()`.
 
-    return move || randomPlay();
-}
-getComputerMove();
+   return move || randomPlay();
+ 
+};
 
-function getWinner(playerMove, computerMove) {
+var getWinner = function(playerMove, computerMove)  {
    var winner;
-   
-    if (playerMove === 'rock' && computerMove === "scissors") {
-        winner = "player";
-}   else if (playerMove === 'scissors' && computerMove === "paper") {
-        winner = "player";
-}   else if (playerMove === 'paper' && computerMove === "rock") {
-        winner = "player";
-}   else if (computerMove === "rock" && playerMove === 'scissors') {
-        winner = "computer";
-}   else if (computerMove === "scissors" && playerMove === 'paper') {
-        winner = "computer";
-}   else if (computerMove === "paper" && playerMove === 'rock') {
-        winner = "computer";
-}   else {
-        winner = "tie";
-    }
+
+   if (playerMove === 'rock' && computerMove === 'scissors') {
+       winner = "Player";
+  } else if (playerMove === 'scissors' && computerMove === 'paper') {
+       winner = "Player";
+  } else if (playerMove === 'paper' && computerMove === 'rock') {
+       winner = "Player";
+  } else if (computerMove === 'rock' && playerMove === 'scissors') {
+       winner = "Computer";
+  } else if (computerMove === 'scissors' && playerMove === 'paper') {
+       winner = "Computer";
+  } else if (computerMove === 'paper' && playerMove === 'rock') {
+       winner = "Computer";
+  } else  {
+       winner = "Tie";
+}
 
 return winner;
-}
-getWinner("scissors", "paper");  
+};
+getWinner();
 
+var playerWins = 0;
+var computerWins = 0;
 
 function playToFive() {
-    console.log("Let's play Rock, Paper, Scissors");
-    var playerWins = 0;
-    var computerWins = 0;
-    // Write code that plays 'Rock, Paper, Scissors' until either the player or the computer has won five times.
-    /* YOUR CODE HERE */
-    return [playerWins, computerWins];
-}
+   console.log("Let\'s play Rock, Paper, Scissors"); 
 
+
+   while  (playerWins<5 && computerWins<5) {
+       
+   var playerMove = getPlayerMove();
+   console.log("Player move is" + ' ' + playerMove);
+   
+   var computerMove = getComputerMove();
+   console.log("Computer move is" + ' ' + computerMove);
+
+   var winner = getWinner(playerMove, computerMove);
+   console.log(winner + ' ' + "is currently in the lead");
+   console.log("The score is currently" + ' ' + playerWins + ' versus ' + computerWins);
+   console.log(winner + ' ' + "won this round\n"); 
+
+  if (winner === "Player")  {
+       playerWins +=1;
+    
+  } else if (winner === "Computer") {
+       computerWins +=1;
+       
+  } else {
+       playerWins +=0;
+       computerWins +=0;
+  }
+
+ playToFive();
+   }
+   return [playerWins, computerWins];
+}
+playToFive();
